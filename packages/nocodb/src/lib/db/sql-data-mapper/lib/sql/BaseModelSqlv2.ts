@@ -69,7 +69,7 @@ class BaseModelSqlv2 {
   private _proto: any;
   private _columns = {};
 
-  private config: any = {
+  public static config: any = {
     limitDefault: 25,
     limitMin: 1,
     limitMax: 1000
@@ -194,8 +194,7 @@ class BaseModelSqlv2 {
             children: filterObj,
             is_group: true,
             logical_op: 'and'
-          }),
-          ...(args.filterArr || [])
+          })
         ],
         qb,
         this.dbDriver
@@ -219,8 +218,7 @@ class BaseModelSqlv2 {
             children: filterObj,
             is_group: true,
             logical_op: 'and'
-          }),
-          ...(args.filterArr || [])
+          })
         ],
         qb,
         this.dbDriver
@@ -1169,22 +1167,7 @@ class BaseModelSqlv2 {
   }
 
   _getListArgs(args: XcFilterWithAlias): XcFilter {
-    const obj: XcFilter = {};
-    obj.where = args.where || args.w || '';
-    obj.having = args.having || args.h || '';
-    obj.condition = args.condition || args.c || {};
-    obj.conditionGraph = args.conditionGraph || {};
-    obj.limit = Math.max(
-      Math.min(
-        args.limit || args.l || this.config.limitDefault,
-        this.config.limitMax
-      ),
-      this.config.limitMin
-    );
-    obj.offset = Math.max(+(args.offset || args.o) || 0, 0);
-    obj.fields = args.fields || args.f || '*';
-    obj.sort = args.sort || args.s || this.model.primaryKey?.[0]?.tn;
-    return obj;
+    return getListArgs(args, this.model);
   }
 
   public async selectObject({ qb }: { qb: QueryBuilder }): Promise<void> {
@@ -2034,7 +2017,7 @@ class BaseModelSqlv2 {
   }
 }
 
-function extractSortsObject(
+export function extractSortsObject(
   _sorts: string | string[],
   aliasColObjMap: { [columnAlias: string]: Column }
 ): Sort[] | void {
@@ -2055,7 +2038,7 @@ function extractSortsObject(
   });
 }
 
-function extractFilterFromXwhere(
+export function extractFilterFromXwhere(
   str,
   aliasColObjMap: { [columnAlias: string]: Column }
 ) {
@@ -2167,6 +2150,25 @@ function getCompositePk(primaryKeys: Column[], row) {
 
 export function sanitize(v) {
   return v?.replace(/([^\\]|^)([?])/g, '$1\\$2');
+}
+
+export function getListArgs(args: XcFilterWithAlias, model: Model): XcFilter {
+  const obj: XcFilter = {};
+  obj.where = args.where || args.w || '';
+  obj.having = args.having || args.h || '';
+  obj.condition = args.condition || args.c || {};
+  obj.conditionGraph = args.conditionGraph || {};
+  obj.limit = Math.max(
+    Math.min(
+      args.limit || args.l || BaseModelSqlv2.config.limitDefault,
+      BaseModelSqlv2.config.limitMax
+    ),
+    BaseModelSqlv2.config.limitMin
+  );
+  obj.offset = Math.max(+(args.offset || args.o) || 0, 0);
+  obj.fields = args.fields || args.f || '*';
+  obj.sort = args.sort || args.s || model.primaryKey?.[0]?.tn;
+  return obj;
 }
 
 export { BaseModelSqlv2 };
