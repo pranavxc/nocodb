@@ -30,14 +30,14 @@ function getAlias() {
   return `__nc_${aliasC++}`;
 }
 
-export async function populateSingleQuery(ctx: {
+export async function generateOptimalQuery(ctx: {
   model: Model;
   view: View;
   base: Base;
   params;
 }): Promise<{ count?: number | string; data: any[] }> {
   if (ctx.base.type !== 'pg') {
-    new Error('Single query only supported in postgres');
+    new Error(`Unsupported db type ${ctx.base.type} for creating optimal query`);
   }
 
   // get knex connection

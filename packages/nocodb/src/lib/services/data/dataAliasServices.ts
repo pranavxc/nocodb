@@ -5,7 +5,7 @@ import NcConnectionMgrv2 from '../../utils/common/NcConnectionMgrv2';
 import getAst from '../../db/sql-data-mapper/lib/sql/helpers/getAst';
 import { PagedResponseImpl } from '../../meta/helpers/PagedResponse';
 import { nocoExecute } from 'nc-help';
-import { populateSingleQuery } from './pgQuery';
+import { generateOptimalQuery } from './pgQuery';
 import { Request } from 'express';
 
 export async function getDataList(
@@ -31,10 +31,10 @@ export async function getDataList(
   } catch (e) {}
 
   if (
-    (process.env.NC_PG_OPTIMISE || req?.headers?.['nc-pg-optimise']) &&
+    (process.env.NC_DB_QUERY_OPTIMISER || req?.headers?.['nc-db-query-optimiser']) &&
     base.type === 'pg'
   ) {
-    const out = await populateSingleQuery({
+    const out = await generateOptimalQuery({
       view,
       model,
       base,
