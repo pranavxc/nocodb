@@ -72,18 +72,6 @@ jobs:
           # remove nocodb-sdk since it's packed with the build
           npm uninstall --save nocodb-sdk
 
-#      - name: Build, tag, and push image to Amazon ECR
-#        env:
-#          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-#          ECR_REPOSITORY: nocohub
-#          IMAGE_TAG: ${{ github.event.inputs.tag }}
-#          CUSTOM_IMAGE_TAG_ARG: ${{ github.event.inputs.tag && format('-t {0}/nocohub:{1}', steps.login-ecr.outputs.registry, github.event.inputs.tag) || '' }}
-#          COMMIT_HASH: ${{ github.sha }}
-##        run: |
-##          cd packages/nocodb &&
-##          docker build -f Dockerfile-pr-build $CUSTOM_IMAGE_TAG_ARG -t $ECR_REGISTRY/$ECR_REPOSITORY:$COMMIT_HASH -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-
-
 
       - name: Get Docker Repository
         id: get-docker-repository
@@ -152,7 +140,7 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
-          push: true
+          push: false
           file: ${{ env.working-directory }}/Dockerfile-pr-build
           tags: |
             nocodb/${{ steps.get-docker-repository.outputs.DOCKER_REPOSITORY }}:${{ steps.get-docker-repository.outputs.DOCKER_BUILD_TAG }}
