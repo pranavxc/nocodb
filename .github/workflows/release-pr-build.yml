@@ -69,7 +69,7 @@ jobs:
       - name: build nocodb
         run: |
           # build nocodb ( pack nocodb-sdk and nc-gui )
-          cd packages/ncocodb && npm install &&
+          cd packages/nocodb && npm install &&
           EE=true ./node_modules/.bin/webpack --config webpack.pr-build.config.js &&
           # remove nocodb-sdk since it's packed with the build
           npm uninstall --save nocodb-sdk
