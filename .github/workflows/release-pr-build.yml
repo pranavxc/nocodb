@@ -49,7 +49,7 @@ jobs:
       - name: build nocodb-sdk
         run: |
           # build nocodb-sdk
-
+          pwd
           cd ../nocodb-sdk &&
           npm ci && npm run build
       - name: build nc-gui and copy to nocodb
