@@ -25,6 +25,8 @@ jobs:
     env:
       working-directory: ./packages/nocodb
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
       # enrich tag for pr release
       - name: set-tag
         id: tag-step
@@ -50,13 +52,13 @@ jobs:
         run: |
           # build nocodb-sdk
           pwd
-          cd ../nocodb-sdk &&
+          cd packages/nocodb-sdk &&
           npm ci && npm run build
       - name: build nc-gui and copy to nocodb
         run: |
           export NODE_OPTIONS="--max_old_space_size=16384"
           # generate static build of nc-gui
-          cd ../nc-gui &&
+          cd packages/nc-gui &&
           npm ci &&
           npm run generate &&
 
@@ -67,7 +69,7 @@ jobs:
       - name: build nocodb
         run: |
           # build nocodb ( pack nocodb-sdk and nc-gui )
-          npm install &&
+          cd packages/ncocodb && npm install &&
           EE=true ./node_modules/.bin/webpack --config webpack.pr-build.config.js &&
           # remove nocodb-sdk since it's packed with the build
           npm uninstall --save nocodb-sdk
