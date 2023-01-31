@@ -19,8 +19,7 @@ COPY ./docker/start-pr-build.sh /usr/src/appEntry/start.sh
 # reduce node_module size with modclean & removing sqlite deps,
 # package built code into app.tar.gz & add execute permission to start.sh
 RUN npm ci --omit=dev --quiet \
-    && rm -rf ./node_modules/sqlite3/deps \
-    && tar -czf ../appEntry/app.tar.gz ./* \
+    && rm -rf ./node_modules/sqlite3/deps \\
     && chmod +x /usr/src/appEntry/start.sh
 
 ##########
@@ -36,11 +35,10 @@ ENV NC_TOOL_DIR=/usr/app/data/
 
 RUN apk --update --no-cache add \
     nodejs \
-    tar \
     dumb-init
 
 # Copy packaged production code & main entry file
-COPY --from=builder /usr/src/appEntry/ /usr/src/appEntry/
+COPY --from=builder /usr/src/app/ /usr/src/app/
 
 EXPOSE 8080
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
