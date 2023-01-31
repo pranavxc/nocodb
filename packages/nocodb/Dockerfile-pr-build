@@ -19,7 +19,7 @@ COPY ./docker/start-pr-build.sh /usr/src/appEntry/start.sh
 # reduce node_module size with modclean & removing sqlite deps,
 # package built code into app.tar.gz & add execute permission to start.sh
 RUN npm ci --omit=dev --quiet \
-    && rm -rf ./node_modules/sqlite3/deps \\
+    && rm -rf ./node_modules/sqlite3/deps \
     && chmod +x /usr/src/appEntry/start.sh
 
 ##########
