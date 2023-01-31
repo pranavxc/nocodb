@@ -595,16 +595,16 @@ export class PgUi {
         return 'eg: ';
 
       case 'bigint':
-        return 'eg: ';
+        return 'eg: 10';
 
       case 'bigserial':
         return 'eg: ';
 
       case 'bit':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'bool':
-        return 'eg: ';
+        return 'eg: false';
 
       case 'box':
         return 'eg: ';
@@ -616,7 +616,7 @@ export class PgUi {
         return 'eg: ';
 
       case 'char':
-        return 'eg: ';
+        return 'eg: \'s\'';
 
       case 'character':
         return "eg: 'sample'";
@@ -664,16 +664,16 @@ export class PgUi {
         return 'eg: ';
 
       case 'int':
-        return 'eg: ';
+        return 'eg: 10';
 
       case 'int2':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'int4':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'int8':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'int4range':
         return 'eg: ';
@@ -682,7 +682,7 @@ export class PgUi {
         return 'eg: ';
 
       case 'integer':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'internal':
         return 'eg: ';
@@ -715,7 +715,7 @@ export class PgUi {
         return 'eg: ';
 
       case 'numeric':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'numrange':
         return 'eg: ';
@@ -880,10 +880,10 @@ export class PgUi {
         return 'eg: ';
 
       case 'float':
-        return 'eg: ';
+        return 'eg: 1.2';
 
       case 'decimal':
-        return 'eg: ';
+        return 'eg: 1.2';
 
       case 'double':
         return 'eg: 1.2';

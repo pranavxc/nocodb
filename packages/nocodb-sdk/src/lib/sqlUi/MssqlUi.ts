@@ -325,13 +325,13 @@ export class MssqlUi {
   static getDefaultValueForDatatype(type) {
     switch (type) {
       case 'bigint':
-        return 'eg: ';
+        return 'eg: 10';
 
       case 'binary':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'bit':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'char':
         return 'eg: ';
@@ -349,10 +349,10 @@ export class MssqlUi {
         return 'eg: ';
 
       case 'decimal':
-        return 'eg: ';
+        return 'eg: 1.2';
 
       case 'float':
-        return 'eg: ';
+        return 'eg: 1.2';
 
       case 'geography':
         return 'eg: ';
@@ -367,10 +367,10 @@ export class MssqlUi {
         return 'eg: ';
 
       case 'int':
-        return 'eg: ';
+        return 'eg: 10';
 
       case 'money':
-        return 'eg: ';
+        return 'eg: 10.2';
 
       case 'nchar':
         return 'eg: ';
@@ -379,10 +379,10 @@ export class MssqlUi {
         return 'eg: ';
 
       case 'numeric':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'nvarchar':
-        return 'eg: ';
+        return 'eg: \'text\'';
 
       case 'real':
         return 'eg: ';
@@ -394,10 +394,10 @@ export class MssqlUi {
         return 'eg: ';
 
       case 'smallint':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'smallmoney':
-        return 'eg: ';
+        return 'eg: 1.5';
 
       case 'sql_variant':
         return 'eg: ';
@@ -415,7 +415,7 @@ export class MssqlUi {
         return 'eg: ';
 
       case 'tinyint':
-        return 'eg: ';
+        return 'eg: 1';
 
       case 'uniqueidentifier':
         return 'eg: ';
@@ -427,7 +427,7 @@ export class MssqlUi {
         return 'eg: ';
 
       case 'varchar':
-        return 'eg: ';
+        return 'eg: \'text\'';
 
       default:
         return '';
